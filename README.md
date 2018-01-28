@@ -1,21 +1,7 @@
 # HamStudy
 
-**TODO: Add description**
+This will eventually be an app that gives easy access to the US ham radio
+exam tests. The intent is to tie it into a slack/irc/whatever bot using
+something like [Hedwig](https://github.com/hedwig-im).
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ham_study` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:ham_study, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ham_study](https://hexdocs.pm/ham_study).
-
+Right now it just parses the extra exam questions into a struct. There's a couple of helper methods right now but not much else yet.
