@@ -6,19 +6,6 @@ defmodule HamStudy do
   """
 
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> HamStudy.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
-
-  @doc """
   List all questions
 
   ## Examples
