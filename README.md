@@ -5,3 +5,11 @@ exam tests. The intent is to tie it into a slack/irc/whatever bot using
 something like [Hedwig](https://github.com/hedwig-im).
 
 Right now it just parses the extra exam questions into a struct. There's a couple of helper methods right now but not much else yet.
+
+## List questions
+
+iex> HamStudy.questions()
+
+## Random question
+
+iex> HamStudy.random_question()

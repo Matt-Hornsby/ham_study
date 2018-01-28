@@ -18,6 +18,13 @@ defmodule HamStudy do
     :world
   end
 
+  @doc """
+  List all questions
+
+  ## Examples
+
+      iex> HamStudy.questions()
+  """
   def questions do
     "priv/extra_questions.txt" |> File.read!() |> parse_questions
   end
@@ -63,10 +70,20 @@ defmodule HamStudy do
   defp convert_correct_answer_to_atom("C"), do: :answer_c
   defp convert_correct_answer_to_atom("D"), do: :answer_d
 
+  @doc """
+  Get a random question
+
+  ## Examples
+
+      iex> HamStudy.random_question
+  """
   def random_question() do
     questions() |> Enum.take_random(1) |> hd
   end
 
+  @doc """
+  Converts the question into a copy/paste-able question
+  """
   def to_copy_pasta(%ExamQuestion{} = map) do
     IO.puts(
       "#{map.subelement <> map.group <> map.number}\n#{map.text}\n#{map.answer_a}\n#{map.answer_b}\n#{
