@@ -10,10 +10,18 @@ defmodule HamStudy do
 
   ## Examples
 
-      iex> HamStudy.questions()
+      iex> HamStudy.all_questions()
   """
-  def questions do
+  def all_questions do
+    extra_questions() ++ general_questions()
+  end
+
+  def extra_questions do
     "priv/extra_questions.txt" |> File.read!() |> parse_questions
+  end
+
+  def general_questions do
+    "priv/general_questions.txt" |> File.read!() |> parse_questions
   end
 
   defp parse_questions(string) do
@@ -28,7 +36,7 @@ defmodule HamStudy do
 
   defp parse_entry(question_lines) do
     [question_details, question_text, a, b, c, d] = question_lines
-    # Logger.debug(question_details)
+    #Logger.debug(question_details)
     <<subelement::binary-size(2), group::binary-size(1), number::binary-size(2), 0x20, "(",
       correct_answer::binary-size(1), ")", other::binary>> = question_details
 
@@ -65,7 +73,7 @@ defmodule HamStudy do
       iex> HamStudy.random_question
   """
   def random_question() do
-    questions() |> Enum.take_random(1) |> hd
+    all_questions() |> Enum.take_random(1) |> hd
   end
 
   @doc """
