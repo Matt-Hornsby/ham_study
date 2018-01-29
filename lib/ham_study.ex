@@ -13,16 +13,14 @@ defmodule HamStudy do
       iex> HamStudy.all_questions()
   """
   def all_questions do
-    extra_questions() ++ general_questions()
+    extra_questions() ++ general_questions() ++ technician_questions()
   end
 
-  def extra_questions do
-    "priv/extra_questions.txt" |> File.read!() |> parse_questions
-  end
+  def extra_questions, do: parse_question_file("priv/extra_questions.txt")
+  def general_questions, do: parse_question_file("priv/general_questions.txt")
+  def technician_questions, do: parse_question_file("priv/technician_questions.txt")
 
-  def general_questions do
-    "priv/general_questions.txt" |> File.read!() |> parse_questions
-  end
+  defp parse_question_file(filepath), do: filepath |> File.read!() |> parse_questions
 
   defp parse_questions(string) do
     parsed_questions =
@@ -35,8 +33,9 @@ defmodule HamStudy do
   end
 
   defp parse_entry(question_lines) do
+    # Logger.debug(question_lines)
     [question_details, question_text, a, b, c, d] = question_lines
-    #Logger.debug(question_details)
+    # Logger.debug(question_details)
     <<subelement::binary-size(2), group::binary-size(1), number::binary-size(2), 0x20, "(",
       correct_answer::binary-size(1), ")", other::binary>> = question_details
 
@@ -52,9 +51,9 @@ defmodule HamStudy do
     exam_question = %{exam_question | answer_c: c |> String.trim("\r")}
     exam_question = %{exam_question | answer_d: d |> String.trim("\r")}
 
-    exam_question = %{
-      exam_question
-      | correct_answer: correct_answer |> convert_correct_answer_to_atom
+    exam_question = 
+    %{
+      exam_question | correct_answer: correct_answer |> convert_correct_answer_to_atom
     }
 
     exam_question
